@@ -16,6 +16,8 @@ class CrawlSgSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
+
+        print('user agent: ', response.request.headers['User-Agent'])
         items = response.css('div.company_items').extract()
         for item in items:
             title = item.css('.normal_title::text').extract_first()
